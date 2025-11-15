@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>意見を送る</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>意見を送る</h1>
+  <a href="index.html" class="button">トップに戻る</a>
+</header>
+
+<main>
+  <form id="feedbackForm" action="send.php" method="post">
+    <label>
+      種類：
+      <select name="type" required>
+        <option value="">選択してください</option>
+        <option value="改善希望">改善希望</option>
+        <option value="校則見直し">校則見直し</option>
+        <option value="その他">その他</option>
+      </select>
+    </label>
+
+    <label>
+      内容：
+      <textarea name="message" id="message" rows="6" placeholder="ここに意見を書いてください..." required maxlength="500"></textarea>
+    </label>
+
+    <button type="submit">送信</button>
+  </form>
+</main>
+
+<script>
+const form = document.getElementById('feedbackForm');
+form.addEventListener('submit', function(e){
+  const message = document.getElementById('message').value.trim();
+  if(!message){
+    alert("内容を入力してください。");
+    e.preventDefault();
+    return;
+  }
+  if(message.length > 500){
+    alert("内容は500文字以内にしてください。");
+    e.preventDefault();
+    return;
+  }
+  if(!confirm("送信してもよろしいですか？")){
+    e.preventDefault();
+  }
+});
+</script>
+</body>
+</html>
